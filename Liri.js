@@ -51,9 +51,9 @@ let getTweets = () => {
 
 let spotifyCall = (argString) => {
   var spotify = new Spotify(keys.spotify);
-  if (argString === undefined) {
-    argString = "What's my age again";
-  }
+  if (argString === '') {
+    argString = "The Sign Ace of Base";
+  };
   spotify.search(
     {
       type: "track",
@@ -65,20 +65,19 @@ let spotifyCall = (argString) => {
         return;
       }
       var songs = data.tracks.items;
-
       for (var i = 0; i < songs.length; i++) {
         console.log(i);
-        // console.log("artist(s): " + songs[i].artists.map(getArtistNames));
+        // console.log("artist(s): " + songs[i].artists.name);
         console.log("song name: " + songs[i].name);
         console.log("preview song: " + songs[i].preview_url);
         console.log("album: " + songs[i].album.name);
-        console.log("================");
+        console.log("=========");
       }
     });
-}
+};
 
 let songDefault = () => {
-  fs.readFile("random.txt", "utf8", function(error, data) {
+  fs.readFile("random.txt", "utf8", function (error, data) {
     if (error) {
       return console.log(error);
     }
@@ -87,25 +86,20 @@ let songDefault = () => {
     console.log(dataArr);
     spotifyCall(dataArr[1]);
   });
-}
+};
 
 if (process.argv[2] === "movie-this") {
   omdbcall();
-}
+};
 
 if (process.argv[2] === "spotify-this-song") {
   spotifyCall(argString);
-}
+};
 
 if (process.argv[2] === "my-tweets") {
   getTweets();
-}
+};
 
 if (process.argv[2] === "do-what-it-says") {
   songDefault();
-}
-
-
-
-
-
+};
